@@ -243,7 +243,7 @@ function applyInputQuestionState() {
     }
     if (questionInfo) questionInfo.classList.remove('is-transparent');
     if (charCount) charCount.textContent = '0';
-    if (h2) h2.textContent = '마음 속 고민은 무엇인가요?';
+    if (h2) h2.textContent = appState.selectedSpread === 'heart' ? '사랑의 고민은 무엇인가요?' : '마음 속 고민은 무엇인가요?';
   }
 }
 
@@ -1025,7 +1025,12 @@ function setupSpreadSlider() {
         }
       });
 
-      dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === currentIndex);
+        d.style.background = (i === currentIndex)
+          ? (currentIndex === 3 ? '#f472b6' : '')
+          : '';
+      });
     }
 
     function goTo(index) {
